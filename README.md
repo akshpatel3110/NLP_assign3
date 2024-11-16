@@ -3,6 +3,7 @@ Team Members:
 Aksh Minesh Patel (G01418113: apatel66@gmu.edu)
 
 Sreeja Venkatakrishnan (G01438914: svenka7@gmu.edu)
+
 # Implementation of "[GPT-who: An Information Density-based Machine-Generated Text Detector](https://arxiv.org/abs/2310.06202)"
 
 
@@ -18,8 +19,8 @@ Use the package manager [pip](https://pypi.org/project/pip/) to install all requ
 $ pip install -r requirements.txt
 ```
 
-## This repository contains 2 scripts:
-1. [get_uid_features.py](https://github.com/saranya-ven/gpt-who/blob/main/get_uid_features.py): This scripts loads texts and author labels from a csv file/any data source, calculates all UID features needed for GPT-who and writes them to a new csv file. This new generated csv file is the input to [gpt-who.py](https://github.com/saranya-ven/gpt-who/blob/main/gpt-who.py) 
+## The notebook contains 2 scripts:
+1. get_uid_features.py This scripts loads texts and author labels from a csv file/any data source, calculates all UID features needed for GPT-who and writes them to a new csv file. This new generated csv file is the input to gpt-who.py
 
 #### Arguments
 ```
@@ -33,17 +34,11 @@ $ pip install -r requirements.txt
 python gptwho_uid_features.py --input_path ./data/text_labels.csv --cache_path ./model_cache/gpt2-xl --output_path ./scores/uid_features.csv
 ```
 
-2. [gpt-who.py](https://github.com/saranya-ven/gpt-who/blob/main/gpt-who.py): This script takes as input two .csv files with UID features corresponding to the train and test split of the dataset, calculates the UID span features to concatenate with the other 4 (uid_var, uid_diff, uid_diff2, and mean), runs logistic regression, predicts labels, and reports machine text detection performance.
+2. gpt-who.py: This script takes as input two .csv files with UID features corresponding to the train and test split of the dataset, calculates the UID span features to concatenate with the other 4 (uid_var, uid_diff, uid_diff2, and mean), runs logistic regression, predicts labels, and reports machine text detection performance.
 
 #### Arguments
 ```
 --train_file: Path to the CSV file containing UID features for the training split (default: "./scores/train_uid_scores.csv").
 --test_file: Path to the CSV file containing UID features for the test split (default: "./scores/test_uid_scores.csv").
 ```
-#### Example Usage
 
-```
-python uid_span_features_logreg.py --train_file ./data/train_uid_features.csv --test_file ./data/test_uid_features.csv
-```
-
-[Scores data files](https://github.com/saranya-ven/gpt-who/tree/main/scores): We also provide UID feature train and test files for the [ArguGPT](https://arxiv.org/pdf/2304.07666.pdf) dataset as an example dataset to run this code. However, our method can be applied to any custom dataset with "text" and "label" fields corresponding to the textual content and author labels.
